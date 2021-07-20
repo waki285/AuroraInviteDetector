@@ -12,8 +12,8 @@ app.get("/", (req, res, next) => {
 })
 const prefix = "aid!";
 
-const YOUR_GUILD_NAME = "123456789012345678";//これ使うサーバーのID
-const WELCOME_CHANNEL_ID = "901234567890123456";//ようこそを送信するチャンネルID
+const YOUR_GUILD_NAME = "823777823469993985";//これ使うサーバーのID
+const WELCOME_CHANNEL_ID = "824067194396737557";//ようこそを送信するチャンネルID
 
 let allInvites = {};
 
@@ -22,19 +22,19 @@ client.on('ready', async () => {
   const guild = client.guilds.cache.get(YOUR_GUILD_NAME);
   guild.fetchInvites()
   .then(invites => allInvites = invites)
-  .catch(console.error("招待の読み込みにエラーが発生しました"));
+  .catch(err => console.error("招待の読み込みにエラーが発生しました:" + err));
 });
 
 client.on('inviteCreate', async invite => {
   client.guilds.cache.get(YOUR_GUILD_NAME).fetchInvites()
   .then(invites => allInvites = invites)
-  .catch(console.error("招待の読み込みにエラーが発生しました"));
+  .catch(err => console.error("招待の読み込みにエラーが発生しました:" + err));
 });
 
 client.on('inviteDelete', async invite => {
   client.guilds.cache.get(YOUR_GUILD_NAME).fetchInvites()
   .then(invites => allInvites = invites)
-  .catch(console.error("招待の読み込みにエラーが発生しました"));
+  .catch(err => console.error("招待の読み込みにエラーが発生しました:" + err));
 });
 
 client.on('guildMemberAdd', async member => {
@@ -46,7 +46,7 @@ client.on('guildMemberAdd', async member => {
     const inviter_invite = invites.filter(i => i.inviter.id === invite.inviter.id);
     let inviteCount = 0;
     inviter_invite.forEach(inv => inviteCount += inv.uses);
-    client.channels.cache.get(WELCOME_CHANNEL_ID).send(`${member.tag}さんがやってきました。\nこの人を招待したのは${invite.inviter.tag}さんです。\nこの人は${inviter_invite.size}個の招待リンクで、${inviteCount}人を招待しました。`)
+    client.channels.cache.get(WELCOME_CHANNEL_ID).send(`${member.user.tag}さんがやってきました。\nこの人を招待したのは${invite.inviter.tag}さんです。\nこの人は${inviter_invite.size}個の招待リンクで、${inviteCount}人を招待しました。`)
   })
 });
 
