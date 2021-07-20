@@ -1,0 +1,14 @@
+{
+  "name": "AuroraInviteDetector",
+  "version": "1.0.0",
+  "description": "誰が招待したかを検知します。",
+  "main": "index.js",
+  "repository": "https://github.com/waki285/AuroraInviteDetector",
+  "author": "waki285",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "express": "^4.17.1",
+    "signale": "^1.4.0"
+  }
+}
